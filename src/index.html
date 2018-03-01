@@ -2,8 +2,9 @@
 <html lang="en" dir="ltr">
 <head>
   <meta charset="UTF-8">
-  <title>Ionic App</title>
+  <title>Aditya</title>
   <meta name="viewport" content="viewport-fit=cover, width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="mobile-web-app-capable" content="yes">
   <meta name="format-detection" content="telephone=no">
   <meta name="msapplication-tap-highlight" content="no">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
@@ -18,7 +19,6 @@
   <!-- cordova.js required for cordova apps (remove if not needed) -->
   <!-- <script src="cordova.js"></script> -->
 
-   un-comment this code to enable service worker
   <script>
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.register('service-worker.js')
@@ -28,7 +28,11 @@
   </script>
 
   <link href="build/main.css" rel="stylesheet">
-
+  <style>
+     /* awesome-container is only used on the landing page */
+     .awesome-container { font-size: 120% }
+     .awesome-container { width: 50% }
+  </style>
 </head>
 <body>
 
@@ -44,6 +48,21 @@
 
   <!-- The main bundle js is generated during the build process -->
   <script src="build/main.js"></script>
+
+  <script>
+      const messaging = firebase.messaging();
+      messaging.requestPermission()
+      .then(function() {
+        console.log('Notification permission granted.');
+        return messaging.getToken();
+      })
+      .then(function(token) {
+        console.log(token);
+      })
+      .catch(function(err) {
+        console.log('Unable to get permission to notify.', err);
+      })
+  </script>
 
 </body>
 </html>
